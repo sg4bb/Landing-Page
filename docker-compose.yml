@@ -1,0 +1,25 @@
+version: '1'
+
+services:
+  landing_page:
+    image: node:18-alpine
+    container_name: Landing_Page
+    working_dir: /home/node/app/public
+    command: /bin/sh -c "yarn && quasar dev"
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    ports:
+      - 9117:9117
+    
+    volumes:
+      - ./landingpage-prototype:/home/node/app/public
+
+    restart: always
+
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
